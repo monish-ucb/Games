@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Blend Buddies</title>
+  <meta name="description" content="A talking phonics flash card game: learn blends like sh, ch and str, then say the words out loud.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="sky" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <button id="btn-home" class="icon-btn" aria-label="Home" hidden>🏠</button>
+    <div class="brand">Blend <span>Buddies</span></div>
+    <div class="star-count" title="Stars earned">⭐ <span id="star-total">0</span></div>
+    <button id="btn-settings" class="icon-btn" aria-label="Grown-up settings">⚙️</button>
+  </header>
+
+  <main id="app">
+    <!-- HOME -->
+    <section id="screen-home" class="screen active">
+      <div class="hero">
+        <div class="hero-mascots" aria-hidden="true"><span>🦄</span><span>📚</span><span>🍀</span></div>
+        <h1>Let's read together!</h1>
+        <p>Pick your level to start.</p>
+      </div>
+      <div class="age-cards">
+        <button class="age-card age-3" data-age="3">
+          <span class="age-emoji">🦄</span>
+          <span class="age-title">Little Stars</span>
+          <span class="age-sub">Age 3 · say the picture</span>
+          <span class="age-progress" data-progress="3"></span>
+        </button>
+        <button class="age-card age-6" data-age="6">
+          <span class="age-emoji">🚀</span>
+          <span class="age-title">Super Readers</span>
+          <span class="age-sub">Age 6 · read the word</span>
+          <span class="age-progress" data-progress="6"></span>
+        </button>
+      </div>
+      <p id="mic-note" class="note" hidden></p>
+    </section>
+
+    <!-- LEVEL MAP -->
+    <section id="screen-map" class="screen">
+      <h2 id="map-title"></h2>
+      <p id="map-tagline" class="note"></p>
+      <ol id="level-path" class="level-path"></ol>
+    </section>
+
+    <!-- PLAY -->
+    <section id="screen-play" class="screen">
+      <div class="play-top">
+        <div id="level-label" class="level-label"></div>
+        <div id="dots" class="dots"></div>
+      </div>
+
+      <!-- Blend intro card -->
+      <div id="intro" class="flashcard intro-card">
+        <div class="intro-hint">New sound!</div>
+        <div id="intro-blend" class="intro-blend"></div>
+        <div id="intro-examples" class="intro-examples"></div>
+        <div class="row">
+          <button id="btn-hear-blend" class="btn btn-soft">🔊 Hear it</button>
+          <button id="btn-start-words" class="btn btn-go">Let's go! ➜</button>
+        </div>
+      </div>
+
+      <!-- Word card -->
+      <div id="word" class="flashcard word-card" hidden>
+        <div id="pic" class="pic"></div>
+        <div id="word-text" class="word-text"></div>
+        <div id="sound-out" class="sound-out" hidden></div>
+        <div id="bubble" class="bubble" aria-live="polite"></div>
+        <div id="mic" class="mic" hidden><span>🎤</span><i></i><i></i></div>
+        <div class="row">
+          <button id="btn-play" class="btn btn-play">▶ Play</button>
+        </div>
+        <div id="grownup-row" class="grownup-row">
+          <span>Grown-up:</span>
+          <button id="btn-judge-yes" class="chip">✓ Said it right</button>
+          <button id="btn-judge-help" class="chip">🧩 Sound it out</button>
+          <button id="btn-hear-word" class="chip">🔊 Hear word</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="screen-results" class="screen">
+      <div class="flashcard results-card">
+        <div id="results-emoji" class="results-emoji"></div>
+        <h2 id="results-title"></h2>
+        <div id="results-stars" class="results-stars"></div>
+        <p id="results-msg"></p>
+        <ul id="results-words" class="results-words"></ul>
+        <div class="row">
+          <button id="btn-replay" class="btn btn-soft">🔁 Play again</button>
+          <button id="btn-next" class="btn btn-go">Next level ➜</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Settings -->
+  <dialog id="settings">
+    <form method="dialog">
+      <h2>Grown-up settings</h2>
+      <label class="toggle"><input type="checkbox" id="opt-mic"> Listen with the microphone</label>
+      <p class="note small">Off = you tap “Said it right” or “Sound it out” after your child answers.</p>
+      <label class="toggle"><input type="checkbox" id="opt-unlock"> Unlock every level</label>
+      <label class="toggle"><input type="checkbox" id="opt-sfx"> Sound effects</label>
+      <div class="row">
+        <button type="button" id="btn-reset" class="btn btn-soft">Reset progress</button>
+        <button class="btn btn-go">Done</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="fx" aria-hidden="true"></div>
+  <div id="banner" class="banner" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
